@@ -6,3 +6,16 @@
 	border: 1px solid #E1E1E1;
 	border-radius: 4px
 }
+
+.intro h1 {
+	margin-bottom: -0.4rem;
+}
+
+.domainForm .searchBar {
+	width: 80%;
+	margin-right: .4rem;
+}
+
+.domainForm .searchSubmit {
+	width: 19%;
+}

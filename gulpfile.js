@@ -7,6 +7,7 @@ var reactify = require('reactify');
 gulp.task('app', ['clean'], function() {
 	return browserify('./src/main.js')
 	.transform(reactify)
+	.external(require.resolve('react-router'))
 	.external(require.resolve('react'))
 	.external(require.resolve('flux-react'))
 	.external(require.resolve('moment'))
@@ -19,6 +20,7 @@ gulp.task('common', function() {
 	del(['./www/js/common.js']);
 	return browserify()
 	.require(require.resolve('react'), { expose: 'react' })
+	.require(require.resolve('react-router'), { expose: 'react-router' })
 	.require(require.resolve('flux-react'), { expose: 'flux-react' })
 	.require(require.resolve('moment'), { expose: 'moment' })
 	.bundle(function(err, libs) {

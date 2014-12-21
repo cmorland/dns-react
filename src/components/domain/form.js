@@ -1,5 +1,4 @@
 var React = require('react');
-var Form = require('./item.js');
 var Store = require('./store.js');
 var Actions = require('./actions.js');
 
@@ -38,10 +37,11 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<div>
+				<h2>Domain</h2>
 				<p>Perform a domain query.</p>
 				<form className="domainForm" onSubmit={this.handleSubmit}>
-					<input className="u-full-width" type="text" placeholder="example.com" ref="query" />
-					<input type="submit" value="post" />
+					<input className="u-pull-left searchBar" type="text" placeholder="example.com" ref="query" />
+					<input className="searchSubmit" type="submit" value="post" />
 					<p>{this.state.error}</p>
 				</form>
 			</div>

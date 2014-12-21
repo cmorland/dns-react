@@ -1,6 +1,8 @@
 var React = require('react');
 var Item = require('./item.js');
 var Store = require('./store.js');
+var Form = require('./form.js');
+var Actions = require('./actions.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -10,12 +12,15 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function () {
 		Store.onAny(this.changeState);
+		if (this.props.params.query) {
+			console.log("got query");
+			Actions.addDomainQuery(this.props.params.query);
+		}
 	},
 	componentWillUnmount: function () {
 		Store.offAny(this.changeState);
 	},
 	changeState: function () {
-		console.log("changeState: " + Store.getResult());
 		this.setState({
 			result: Store.getResult()
 		});
@@ -28,6 +33,7 @@ module.exports = React.createClass({
 		}
 		return (
 			<div>
+				<Form />
 				{domainNode}
 			</div>
 		);
