@@ -18,4 +18,46 @@
 
 .domainForm .searchSubmit {
 	width: 19%;
+	text-align: center;
+	padding: 0;
+}
+
+.intro ul {
+	list-style: none;
+}
+
+.intro ul li a {
+	text-decoration: none;
+}
+
+.intro ul li a.active {
+	text-decoration: underline;
+}
+
+#nav {
+	position: fixed;
+}
+
+#main {
+	margin-top: 1rem;
+}
+
+.noBottomMargin {
+	margin-top: 1rem;
+	margin-bottom: 0;
+}
+
+.block i.u-pull-right {
+	font-size: 1.3rem;
+	margin-left: 1.2rem;
+	border: 1px solid #bbb;
+	padding: 0.1rem 0.7rem;
+	-webkit-font-smoothing: antialiased;
+	border: 1px solid #E1E1E1;
+	border-radius: 4px
+}
+
+.block i.u-pull-right:hover {
+	color: #33C3F0;
+	cursor: pointer;
 }

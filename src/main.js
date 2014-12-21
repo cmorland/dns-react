@@ -5,14 +5,15 @@ var Link = Router.Link;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var DomainBox = require('./components/domain/box.js');
+var EmailBox = require('./components/email/box.js');
 var DomainForm = require('./components/domain/form.js');
 
 var App = React.createClass({
 	render: function() {
 		return (
-			<div className="container">
+			<div className="container" id="main">
 				<div className="row">
-					<div className="three columns">
+					<div className="two columns" id="nav">
 						<div className="intro">
 							<h1>DNS</h1>
 							<p>Tools and ting!</p>
@@ -20,10 +21,14 @@ var App = React.createClass({
 							<ul>
 								<li><Link to="index">Home</Link></li>
 								<li><Link to="domain">Domain</Link></li>
+								<li><Link to="email">Email</Link></li>
 							</ul>
 						</div>
 					</div>
-					<div className="nine columns">
+				</div>
+				<div className="row">
+					<div className="two columns"><p></p></div>
+					<div className="ten columns">
 						<RouteHandler {...this.props} />
 					</div>
 				</div>
@@ -45,6 +50,7 @@ var routes = (
 	<Route name="app" path="/" handler={App}>
 		<Route name="index" handler={Index} />
 		<Route name="domain" path="domain/?:query?" handler={DomainBox} />
+		<Route name="email" path="email/?:query?" handler={EmailBox} />
 		<DefaultRoute handler={Index} />
 	</Route>
 );

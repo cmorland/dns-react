@@ -14,14 +14,14 @@ module.exports = React.createClass({
 		if (!query) { 
 			return;
 		}
-		Actions.addDomainQuery(query);
+		Actions.getDomainsByEmailQuery(query);
 		this.errorReset();
 	},
 	componentWillMount: function() {
-		Store.on('domain.error', this.error);
+		Store.on('email.error', this.error);
 	},
 	componentWillUnmount: function() {
-		Store.off('domain.error', this.error);
+		Store.off('email.error', this.error);
 	},
 	error: function(err) {
 		this.setState({
@@ -36,9 +36,9 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<p className="noBottomMargin">Perform a domain query.</p>
+				<p className="noBottomMargin">Perform a domain check based on email.</p>
 				<form className="domainForm" onSubmit={this.handleSubmit}>
-					<input className="u-pull-left searchBar" type="text" placeholder="example.com" ref="query" />
+					<input className="u-pull-left searchBar" type="text" placeholder="admin@example.com" ref="query" />
 					<input className="searchSubmit" type="submit" value="search" />
 					<p>{this.state.error}</p>
 				</form>

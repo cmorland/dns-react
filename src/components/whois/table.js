@@ -1,12 +1,25 @@
 var React = require('react');
 var moment = require('moment');
+var Router = require('react-router');
+var Link = Router.Link;
 
 module.exports = React.createClass({
 	render: function() {
 		var whois = this.props.data;
 		if ($.isEmptyObject(whois)) {
-			return null;
+			return (
+				<p>No Whois information at present.</p>
+			)
 		}
+
+		if (this.props.raw) {
+			return (
+				<pre>
+					<code>{whois.raw}</code>
+				</pre>
+			)
+		}
+
 		var added = moment(whois.added).format('DD-MM-YYYY');
 		var creationDate = moment(whois.creation_date).format('DD-MM-YYYY');
 		var expirationDate = moment(whois.expiration_date).format('DD-MM-YYYY');
@@ -22,6 +35,9 @@ module.exports = React.createClass({
 			);
 			$.each(contact, function(j, val) {
 				var what = j[0].toUpperCase() + j.slice(1);
+				if (j == "email") {
+					val = <Link to="email" params={{query: val}}>{val}</Link>
+				}
 				contacts.push(
 					<tr>
 						<td></td>
