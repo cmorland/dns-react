@@ -1,4 +1,4 @@
 node_modules/
 *.swp
-www/
+www/js
 *.log
