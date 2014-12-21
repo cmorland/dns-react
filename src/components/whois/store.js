@@ -2,17 +2,24 @@ var flux = require('flux-react');
 var actions = require('./actions.js');
 
 module.exports = flux.createStore({
-	results: [],
+	result: {},
 	actions: [
-		actions.addQuery
+		actions.addWhoisByDomainQuery
 	],
-	addQuery: function(query) {
-		console.log("query: " + query);
-		this.emitChange();
+	addWhoisByDomainQuery: function(query) {
+		var self = this;
+		$.get("/api/v1/domain/" + query + "/whois?limit=1")
+		.done(function(data) {
+			self.result = $.parseJSON(data)[0];
+			self.emit('whois.add');
+		})
+		.fail(function(data) {
+			self.emit('whois.error', "No whois");	
+		});
 	},
 	exports: {
-		getResults: function() {
-			return this.results;
+		getResult: function() {
+			return this.result;
 		}
 	}
 });

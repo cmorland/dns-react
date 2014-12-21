@@ -1,5 +1,4 @@
 var React = require('react');
-var Form = require('./form.js');
 var Item = require('./item.js');
 var Store = require('./store.js');
 
@@ -28,17 +27,8 @@ module.exports = React.createClass({
 			domainNode = <Item data={domain} />;
 		}
 		return (
-			<div className="domainBox">
-				<div className="row">
-					<div className="one-third column">
-						<h3></h3>
-						<p>Perform a domain query.</p>
-						<Form />
-					</div>
-					<div className="two-thirds column">
-						{domainNode}
-					</div>
-				</div>
+			<div>
+				{domainNode}
 			</div>
 		);
 	}

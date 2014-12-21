@@ -15,7 +15,7 @@ module.exports = flux.createStore({
 			self.emit('record.add');
 		})
 		.fail(function(data) {
-			self.emit('record.error', "No recordss");	
+			self.emit('record.error', "No records");	
 		});
 	},
 	exports: {

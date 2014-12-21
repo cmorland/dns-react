@@ -37,11 +37,14 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		return (
-			<form className="domainForm" onSubmit={this.handleSubmit}>
-				<input className="u-full-width" type="text" placeholder="example.com" ref="query" />
-				<input type="submit" value="post" />
-				<p>{this.state.error}</p>
-			</form>
+			<div>
+				<p>Perform a domain query.</p>
+				<form className="domainForm" onSubmit={this.handleSubmit}>
+					<input className="u-full-width" type="text" placeholder="example.com" ref="query" />
+					<input type="submit" value="post" />
+					<p>{this.state.error}</p>
+				</form>
+			</div>
 		);
 	}
 });

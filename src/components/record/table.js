@@ -8,7 +8,6 @@ module.exports = React.createClass({
 		this.props.data.forEach(function(record) {
 			rows.push(<Record data={record} />);
 		});
-		console.log("HELLO");
 		return (
 			<table className="u-full-width">
 				<thead>
