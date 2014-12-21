@@ -1,0 +1,14 @@
+{
+  "name": "dns",
+  "dependencies": {
+    "browserify": "*",
+    "gulp": "*",
+    "react": "*",
+    "underscore": "*",
+    "moment": "*",
+    "del": "*"
+  },
+  "devDependencies": {
+    "gulp-react": "^2.0.0"
+  }
+}
