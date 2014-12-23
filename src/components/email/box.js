@@ -1,9 +1,10 @@
 var React = require('react');
-var List = require('./list.js');
+var List = require('../list.js');
 var Store = require('./store.js');
 var Form = require('../form.js');
 var Actions = require('./actions.js');
 var Loader = require('react-loader');
+var Item = require('./item.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -35,7 +36,7 @@ module.exports = React.createClass({
 					action={Actions.getDomainsByEmailQuery} 
 					store={Store} ns="email"
 					placeholder="admin@example.com" />
-				<List data={this.state.results} />
+				<List data={this.state.results} item={Item} />
 			</div>
 		);
 	}

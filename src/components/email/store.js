@@ -18,7 +18,7 @@ module.exports = flux.createStore({
 			}
 		})
 		.fail(function(data) {
-			self.emit('email.error', "No results");	
+			self.emit('email.error', 'No results");	
 		});
 	},
 	exports: {

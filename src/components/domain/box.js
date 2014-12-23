@@ -11,29 +11,31 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount: function () {
-		Store.onAny(this.changeState);
+		Store.on('domain.loaded', this.loaded);
 		if (this.props.params.query) {
 			Actions.addDomainQuery(this.props.params.query);
 		}
 	},
 	componentWillUnmount: function () {
-		Store.offAny(this.changeState);
+		Store.off('domain.loaded', this.loaded);
 	},
-	changeState: function () {
+	loaded: function () {
 		this.setState({
 			result: Store.getResult()
 		});
 	},
 	render: function() {
-		var domain = this.state.result;
-		var domainNode = '';
-		if (!$.isEmptyObject(domain)) {
-			domainNode = <Item data={domain} />;
+		var result = this.state.result;
+		var nodes = '';
+		if (!$.isEmptyObject(result)) {
+			nodes = <Item data={result} />;
 		}
 		return (
 			<div>
-				<Form message="Perform a domain check." action={Actions.addDomainQuery} store={Store} ns="domain" placeholder="example.com" />
-				{domainNode}
+				<Form message="Perform a domain check."
+					action={Actions.addDomainQuery} 
+					store={Store} ns="domain" placeholder="example.com" />
+				{nodes}
 			</div>
 		);
 	}

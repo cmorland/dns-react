@@ -11,7 +11,7 @@ module.exports = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			error: "",
+			error: '',
 			loaded: true
 		};
 	},
@@ -45,7 +45,7 @@ module.exports = React.createClass({
 	},
 	errorReset: function() {
 		this.setState({
-			error: "",
+			error: '',
 			loaded: false
 		});
 	},
