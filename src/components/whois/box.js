@@ -2,11 +2,12 @@ var React = require('react');
 var Form = require('./form.js');
 var List = require('./list.js');
 var Store = require('./store.js');
+var Table = require('./table.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
-			results: Store.getResults(),
+			result: Store.getResult(),
 		};
 	},
 	componentWillMount: function () {
@@ -17,23 +18,14 @@ module.exports = React.createClass({
 	},
 	changeState: function () {
 		this.setState({
-			results: Store.getResults()
+			result: Store.getResult()
 		});
 	},
 	render: function() {
 		return (
-			<div className="domainBox">
-				<div className="row">
-					<div className="one-third column">
-						<h3></h3>
-						<p>Perform a domain query.</p>
-						<Form />
-					</div>
-					<div className="two-thirds column">
-						<h6>Recent Queries</h6>
-						<List data={this.state.results} />
-					</div>
-				</div>
+			<div>
+				<Form />
+				<Table data={this.state.result} />
 			</div>
 		);
 	}

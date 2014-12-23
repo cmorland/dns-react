@@ -37,8 +37,8 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<p className="noBottomMargin">Perform a domain check based on email.</p>
-				<form className="domainForm" onSubmit={this.handleSubmit}>
-					<input className="u-pull-left searchBar" type="text" placeholder="admin@example.com" ref="query" />
+				<form onSubmit={this.handleSubmit}>
+					<input className="searchBar u-pull-left" type="text" placeholder="admin@example.com" ref="query" />
 					<input className="searchSubmit" type="submit" value="search" />
 					<p>{this.state.error}</p>
 				</form>

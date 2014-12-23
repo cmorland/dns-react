@@ -6,6 +6,7 @@ var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var DomainBox = require('./components/domain/box.js');
 var EmailBox = require('./components/email/box.js');
+var WhoisBox = require('./components/whois/box.js');
 var DomainForm = require('./components/domain/form.js');
 
 var App = React.createClass({
@@ -21,6 +22,7 @@ var App = React.createClass({
 							<ul>
 								<li><Link to="index">Home</Link></li>
 								<li><Link to="domain">Domain</Link></li>
+								<li><Link to="whois">Whois</Link></li>
 								<li><Link to="email">Email</Link></li>
 							</ul>
 						</div>
@@ -50,6 +52,7 @@ var routes = (
 	<Route name="app" path="/" handler={App}>
 		<Route name="index" handler={Index} />
 		<Route name="domain" path="domain/?:query?" handler={DomainBox} />
+		<Route name="whois" path="whois/?:query?" handler={WhoisBox} />
 		<Route name="email" path="email/?:query?" handler={EmailBox} />
 		<DefaultRoute handler={Index} />
 	</Route>

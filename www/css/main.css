@@ -11,12 +11,12 @@
 	margin-bottom: -0.4rem;
 }
 
-.domainForm .searchBar {
+form .searchBar {
 	width: 80%;
 	margin-right: .4rem;
 }
 
-.domainForm .searchSubmit {
+form .searchSubmit {
 	width: 19%;
 	text-align: center;
 	padding: 0;

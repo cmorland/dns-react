@@ -48,6 +48,19 @@ module.exports = React.createClass({
 			});
 		});
 
+		var id = whois.data.id;
+		if (id && id.length > 0) {
+			id = id.join("\n");
+		}
+		var registrar = whois.data.registrar;
+		if (registrar && registrar.length > 0) {
+			registrar = registrar.join("\n");
+		}
+		var status = whois.data.status;
+		if (status && status.length > 0) {
+			status = status.join("\n");
+		}
+
 		return (
 			<div>
 				<table className="u-full-width">
@@ -60,9 +73,9 @@ module.exports = React.createClass({
 					</thead>
 					<tbody>
 						<tr>
-							<td>{whois.data.id.join("\n")}</td>
-							<td>{whois.data.registrar.join("\n")}</td>
-							<td>{whois.data.status.join("\n")}</td>
+							<td>{id}</td>
+							<td>{registrar}</td>
+							<td>{status}</td>
 						</tr>
 					</tbody>
 				</table>
