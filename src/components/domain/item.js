@@ -5,6 +5,7 @@ var RecordTable = require('../record/table.js');
 var WhoisStore = require('../whois/store.js');
 var WhoisActions = require('../whois/actions.js');
 var WhoisTable = require('../whois/table.js');
+var Store = require('./store');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -17,14 +18,21 @@ module.exports = React.createClass({
 		};
 	},
 	componentWillMount: function() {
+		Store.on('domain.loaded', this.loaded);
 		RecordStore.on('record.loaded', this.changeState);
 		WhoisStore.on('whois.loaded', this.changeState);
-		RecordActions.addRecordsByDomainQuery(this.props.data.uuid);
-		WhoisActions.addWhoisByDomainQuery(this.props.data.uuid);
+		this.loaded();
 	},
 	componentWillUnmount: function() {
 		RecordStore.off('record.loaded', this.changeState);
 		WhoisStore.off('whois.loaded', this.changeState);
+		console.log('unmount');
+	},
+	loaded: function() {
+		RecordActions.clear();
+		WhoisActions.clear();
+		RecordActions.addRecordsByDomainQuery(this.props.data.uuid);
+		WhoisActions.addWhoisByDomainQuery(this.props.data.uuid);
 	},
 	changeState: function() {
 		this.setState({

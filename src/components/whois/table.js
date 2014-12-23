@@ -27,8 +27,6 @@ module.exports = React.createClass({
 
 		var contacts = [];
 		$.each(whois.contacts, function(i, contact) {
-			console.log(contact);
-			console.log(_.size(contact));
 			if (_.size(contact) > 0) {
 			var who = i[0].toUpperCase() + i.slice(1);
 			contacts.push(

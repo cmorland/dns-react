@@ -5,13 +5,19 @@ module.exports = flux.createStore({
 	result: {},
 	actions: [
 		actions.addWhoisByDomainQuery,
-		actions.queryDomain
+		actions.queryDomain,
+		actions.clear
 	],
+	clear: function() {
+		console.log('whois clear');
+		this.result = {};
+		this.emit('whois.loaded');
+	},
 	addWhoisByDomainQuery: function(query) {
+		this.emit('whois.query');
 		var self = this;
 		$.get("/api/v1/domain/" + query + "/whois?limit=1")
 		.done(function(data) {
-			console.log(data);
 			self.result = $.parseJSON(data)[0];
 			self.emit('whois.loaded');
 		})
@@ -23,7 +29,6 @@ module.exports = flux.createStore({
 		var self = this;
 		$.post("/api/v1/whois/", '{"query": "'+query+'"}"')
 		.done(function(data) {
-			console.log(data);
 			self.result = $.parseJSON(data)[0];
 			self.emit('whois.loaded');
 		})

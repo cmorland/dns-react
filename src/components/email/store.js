@@ -4,9 +4,14 @@ var actions = require('./actions.js');
 module.exports = flux.createStore({
 	results: [],
 	actions: [
-		actions.getDomainsByEmailQuery
+		actions.getDomainsByEmailQuery,
+		actions.clear
 	],
+	clear: function() {
+		this.results = [];
+	},
 	getDomainsByEmailQuery: function(query) {
+		this.emit('email.query');
 		var self = this;
 		$.get("/api/v1/domain/query/email/" + query)
 		.done(function(data) {
@@ -18,7 +23,7 @@ module.exports = flux.createStore({
 			}
 		})
 		.fail(function(data) {
-			self.emit('email.error', 'No results");	
+			self.emit('email.error', 'No results');	
 		});
 	},
 	exports: {

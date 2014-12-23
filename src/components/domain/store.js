@@ -4,9 +4,14 @@ var actions = require('./actions.js');
 module.exports = flux.createStore({
 	result: {},
 	actions: [
-		actions.addDomainQuery
+		actions.addDomainQuery,
+		actions.clear
 	],
+	clear: function() {
+		this.result = {};
+	},
 	addDomainQuery: function(query) {
+		this.emit('domain.query');
 		var self = this;
 		$.get("/api/v1/domain/" + query)
 		.done(function(data) {

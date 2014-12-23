@@ -4,10 +4,14 @@ var actions = require('./actions.js');
 module.exports = flux.createStore({
 	records: [],
 	actions: [
-		actions.addRecordsByDomainQuery
+		actions.addRecordsByDomainQuery,
+		actions.clear
 	],
+	clear: function() {
+		console.log('records clear');
+		this.records = [];
+	},
 	addRecordsByDomainQuery: function(query) {
-		console.log("addRecordByDomainQuery records: " + query);
 		var self = this;
 		$.get("/api/v1/domain/" + query + "/records")
 		.done(function(data) {

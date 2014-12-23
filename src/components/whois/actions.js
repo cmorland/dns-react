@@ -2,5 +2,6 @@ var flux = require('flux-react');
 
 module.exports = flux.createActions([
 	'addWhoisByDomainQuery',
-	'queryDomain'
+	'queryDomain',
+	'clear'
 ]);
