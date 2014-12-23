@@ -2,6 +2,7 @@ var React = require('react');
 var moment = require('moment');
 var Router = require('react-router');
 var Link = Router.Link;
+var _ = require('underscore');
 
 module.exports = React.createClass({
 	render: function() {
@@ -20,13 +21,15 @@ module.exports = React.createClass({
 			)
 		}
 
-		var added = moment(whois.added).format('DD-MM-YYYY');
 		var creationDate = moment(whois.creation_date).format('DD-MM-YYYY');
 		var expirationDate = moment(whois.expiration_date).format('DD-MM-YYYY');
 		var updatedDate = moment(whois.updated_date).format('DD-MM-YYYY');
 
 		var contacts = [];
 		$.each(whois.contacts, function(i, contact) {
+			console.log(contact);
+			console.log(_.size(contact));
+			if (_.size(contact) > 0) {
 			var who = i[0].toUpperCase() + i.slice(1);
 			contacts.push(
 				<tr>
@@ -46,6 +49,7 @@ module.exports = React.createClass({
 					</tr>
 				);
 			});
+			}
 		});
 
 		var id = whois.data.id;
@@ -115,7 +119,6 @@ module.exports = React.createClass({
 				<table className="u-full-width">
 					<thead>
 						<tr>
-							<th>Added</th>
 							<th>Creation</th>
 							<th>Expiration</th>
 							<th>Updated</th>
@@ -123,7 +126,6 @@ module.exports = React.createClass({
 					</thead>
 					<tbody>
 						<tr>
-							<td>{added}</td>
 							<td>{creationDate}</td>
 							<td>{expirationDate}</td>
 							<td>{updatedDate}</td>

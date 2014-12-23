@@ -1,5 +1,4 @@
 var React = require('react');
-var Record = require('../record/item.js');
 var RecordStore = require('../record/store.js');
 var RecordActions = require('../record/actions.js');
 var RecordTable = require('../record/table.js');
@@ -12,20 +11,20 @@ module.exports = React.createClass({
 		return {
 			whois: WhoisStore.getResult(),
 			records: RecordStore.getRecords(),
-			toggleWhoisData: false,
-			toggleRecordsData: false,
+			toggleWhoisData: true,
+			toggleRecordsData: true,
 			showRawWhois: false
 		};
 	},
 	componentWillMount: function() {
-		RecordStore.on('record.add', this.changeState);
-		WhoisStore.on('whois.add', this.changeState);
+		RecordStore.on('record.loaded', this.changeState);
+		WhoisStore.on('whois.loaded', this.changeState);
 		RecordActions.addRecordsByDomainQuery(this.props.data.uuid);
 		WhoisActions.addWhoisByDomainQuery(this.props.data.uuid);
 	},
 	componentWillUnmount: function() {
-		RecordStore.off('record.add', this.changeState);
-		WhoisStore.off('whois.add', this.changeState);
+		RecordStore.off('record.loaded', this.changeState);
+		WhoisStore.off('whois.loaded', this.changeState);
 	},
 	changeState: function() {
 		this.setState({
@@ -74,12 +73,14 @@ module.exports = React.createClass({
 							<tr>
 								<th>Name</th>
 								<th>TLD</th>
+								<th>Link</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>{domain.name}</td>
 								<td>{domain.tld.name}</td>
+								<td><a href={"http://" + domain.name + "." + domain.tld.name} target="_blank">http://{domain.name+ "." + domain.tld.name}</a></td>
 							</tr>
 						</tbody>
 					</table>

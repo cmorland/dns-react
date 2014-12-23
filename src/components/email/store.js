@@ -11,7 +11,11 @@ module.exports = flux.createStore({
 		$.get("/api/v1/domain/query/email/" + query)
 		.done(function(data) {
 			self.results = $.parseJSON(data);
-			self.emitChange();
+			if (self.results.length > 0) {
+				self.emit('email.loaded');
+			} else {
+				self.emit('email.error', 'Found no results.');
+			}
 		})
 		.fail(function(data) {
 			self.emit('email.error', "No results");	

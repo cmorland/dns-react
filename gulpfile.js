@@ -11,6 +11,9 @@ gulp.task('app', ['clean'], function() {
 	.external(require.resolve('react'))
 	.external(require.resolve('flux-react'))
 	.external(require.resolve('moment'))
+	.external(require.resolve('underscore'))
+	.external(require.resolve('spin'))
+	.external(require.resolve('react-loader'))
 	.bundle(function(err, app) {
 		fs.writeFile('./www/js/app.js', app);
 	});
@@ -23,6 +26,9 @@ gulp.task('common', function() {
 	.require(require.resolve('react-router'), { expose: 'react-router' })
 	.require(require.resolve('flux-react'), { expose: 'flux-react' })
 	.require(require.resolve('moment'), { expose: 'moment' })
+	.require(require.resolve('underscore'), { expose: 'underscore' })
+	.require(require.resolve('spin'), { expose: 'spin' })
+	.require(require.resolve('react-loader'), { expose: 'react-loader' })
 	.bundle(function(err, libs) {
 		fs.writeFile('./www/js/common.js', libs);
 	});

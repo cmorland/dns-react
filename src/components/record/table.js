@@ -1,12 +1,20 @@
 var React = require('react');
 var moment = require('moment');
-var Record = require('./item.js');
 
 module.exports = React.createClass({
 	render: function() {
 		var rows = [];
 		this.props.data.forEach(function(record) {
-			rows.push(<Record data={record} />);
+			var parse_date = moment(record.parse_date).format('DD-MM-YYYY');
+			rows.push(
+				<tr>
+					<td>{record.name}</td>
+					<td>{parse_date}</td>
+					<td>{record.type.name}</td>
+					<td>{record.args.ttl}</td>
+					<td>{record.args.args}</td>
+				</tr>
+			);
 		});
 		return (
 			<table className="u-full-width">

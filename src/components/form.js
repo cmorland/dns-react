@@ -1,9 +1,14 @@
 var React = require('react');
-var Store = require('./store.js');
-var Actions = require('./actions.js');
 var Loader = require('react-loader');
 
 module.exports = React.createClass({
+	propTypes: {
+		action: React.PropTypes.func.isRequired,
+		placeholder: React.PropTypes.string.isRequired,
+		message: React.PropTypes.string.isRequired,
+		ns: React.PropTypes.string.isRequired,
+		store: React.PropTypes.object.isRequired
+	},
 	getInitialState: function() {
 		return {
 			error: "",
@@ -16,16 +21,16 @@ module.exports = React.createClass({
 		if (!query) { 
 			return;
 		}
-		Actions.getDomainsByEmailQuery(query);
+		this.props.action(query);
 		this.errorReset();
 	},
 	componentWillMount: function() {
-		Store.on('email.error', this.error);
-		Store.on('email.loaded', this.loaded);
+		this.props.store.on(this.props.ns + '.error', this.error);
+		this.props.store.on(this.props.ns + '.loaded', this.loaded);
 	},
 	componentWillUnmount: function() {
-		Store.off('email.error', this.error);
-		Store.off('email.loaded', this.loaded);
+		this.props.store.off(this.props.ns + '.error', this.error);
+		this.props.store.off(this.props.ns + '.loaded', this.loaded);
 	},
 	loaded: function() {
 		this.setState({
@@ -53,9 +58,9 @@ module.exports = React.createClass({
 		}
 		return (
 			<div>
-				<p className="noBottomMargin">Perform a domain check based on email.</p>
+				<p className="noBottomMargin">{this.props.message}</p>
 				<form onSubmit={this.handleSubmit}>
-					<input className="searchBar u-pull-left" type="text" placeholder="admin@example.com" ref="query" />
+					<input className="searchBar u-pull-left" type="text" placeholder={this.props.placeholder} ref="query" />
 					<button className={loaded} type="submit" disabled={!this.state.loaded}>
 						{buttonText}
 					</button>

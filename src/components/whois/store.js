@@ -13,7 +13,7 @@ module.exports = flux.createStore({
 		.done(function(data) {
 			console.log(data);
 			self.result = $.parseJSON(data)[0];
-			self.emit('whois.add');
+			self.emit('whois.loaded');
 		})
 		.fail(function(data) {
 			self.emit('whois.error', 'No whois result.');	
@@ -25,7 +25,7 @@ module.exports = flux.createStore({
 		.done(function(data) {
 			console.log(data);
 			self.result = $.parseJSON(data)[0];
-			self.emit('whois.add');
+			self.emit('whois.loaded');
 		})
 		.fail(function(data) {
 			self.emit('whois.error', 'No whois result.');

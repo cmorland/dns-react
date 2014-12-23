@@ -7,7 +7,6 @@ var RouteHandler = Router.RouteHandler;
 var DomainBox = require('./components/domain/box.js');
 var EmailBox = require('./components/email/box.js');
 var WhoisBox = require('./components/whois/box.js');
-var DomainForm = require('./components/domain/form.js');
 
 var App = React.createClass({
 	render: function() {

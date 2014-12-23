@@ -1,8 +1,9 @@
 var React = require('react');
-var Form = require('./form.js');
+var Form = require('../form.js');
 var List = require('./list.js');
 var Store = require('./store.js');
 var Table = require('./table.js');
+var Actions = require('./actions.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -24,7 +25,7 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<Form />
+				<Form message="Perform a domain whois query." store={Store} ns="whois" placeholder="example.com" action={Actions.queryDomain} />
 				<Table data={this.state.result} />
 			</div>
 		);

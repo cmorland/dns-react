@@ -1,7 +1,7 @@
 var React = require('react');
 var Item = require('./item.js');
 var Store = require('./store.js');
-var Form = require('./form.js');
+var Form = require('../form.js');
 var Actions = require('./actions.js');
 
 module.exports = React.createClass({
@@ -13,7 +13,6 @@ module.exports = React.createClass({
 	componentWillMount: function () {
 		Store.onAny(this.changeState);
 		if (this.props.params.query) {
-			console.log("got query");
 			Actions.addDomainQuery(this.props.params.query);
 		}
 	},
@@ -33,7 +32,7 @@ module.exports = React.createClass({
 		}
 		return (
 			<div>
-				<Form />
+				<Form message="Perform a domain check." action={Actions.addDomainQuery} store={Store} ns="domain" placeholder="example.com" />
 				{domainNode}
 			</div>
 		);

@@ -11,7 +11,7 @@ module.exports = flux.createStore({
 		$.get("/api/v1/domain/" + query)
 		.done(function(data) {
 			self.result = $.parseJSON(data);
-			self.emitChange();
+			self.emit('domain.loaded');
 		})
 		.fail(function(data) {
 			self.emit('domain.error', "No results");	
