@@ -13,7 +13,7 @@ module.exports = React.createClass({
 	componentWillMount: function () {
 		Store.on('domain.loaded', this.loaded);
 		if (this.props.params.query) {
-			Actions.addDomainQuery(this.props.params.query);
+			Actions.query(this.props.params.query);
 		}
 	},
 	componentWillUnmount: function () {
@@ -33,7 +33,7 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<Form message="Perform a domain check."
-					action={Actions.addDomainQuery} 
+					action={Actions.query} 
 					store={Store} ns="domain" placeholder="example.com" />
 				{nodes}
 			</div>

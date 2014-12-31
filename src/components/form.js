@@ -1,5 +1,4 @@
 var React = require('react');
-var Loader = require('react-loader');
 
 module.exports = React.createClass({
 	propTypes: {

@@ -8,7 +8,6 @@ module.exports = flux.createStore({
 		actions.clear
 	],
 	clear: function() {
-		console.log('records clear');
 		this.records = [];
 	},
 	addRecordsByDomainQuery: function(query) {

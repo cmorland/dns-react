@@ -24,9 +24,9 @@ module.exports = React.createClass({
 		this.loaded();
 	},
 	componentWillUnmount: function() {
+		Store.off('domain.loaded', this.loaded);
 		RecordStore.off('record.loaded', this.changeState);
 		WhoisStore.off('whois.loaded', this.changeState);
-		console.log('unmount');
 	},
 	loaded: function() {
 		RecordActions.clear();

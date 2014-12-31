@@ -9,9 +9,7 @@ module.exports = flux.createStore({
 		actions.clear
 	],
 	clear: function() {
-		console.log('whois clear');
 		this.result = {};
-		this.emit('whois.loaded');
 	},
 	addWhoisByDomainQuery: function(query) {
 		this.emit('whois.query');
