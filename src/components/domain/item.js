@@ -14,7 +14,7 @@ module.exports = React.createClass({
 			records: RecordStore.getRecords(),
 			toggleWhoisData: true,
 			toggleRecordsData: true,
-			showRawWhois: false
+			showRawWhois: true
 		};
 	},
 	componentWillMount: function() {

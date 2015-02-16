@@ -14,7 +14,7 @@ module.exports = flux.createStore({
 	addWhoisByDomainQuery: function(query) {
 		this.emit('whois.query');
 		var self = this;
-		$.get("/api/v1/domain/" + query + "/whois?limit=1")
+		$.get("/api/v1/whois/?limit=1&duuid="+query)
 		.done(function(data) {
 			self.result = $.parseJSON(data)[0];
 			self.emit('whois.loaded');

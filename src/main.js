@@ -7,13 +7,14 @@ var RouteHandler = Router.RouteHandler;
 var DomainBox = require('./components/domain/box.js');
 var EmailBox = require('./components/email/box.js');
 var WhoisBox = require('./components/whois/box.js');
+var WatcherBox = require('./components/watcher/box.js');
 
 var App = React.createClass({
 	render: function() {
 		return (
 			<div className="container" id="main">
 				<div className="row">
-					<div className="two columns" id="nav">
+					<div className="one columns" id="nav">
 						<div className="intro">
 							<h1>DNS</h1>
 							<p>Tools and ting!</p>
@@ -22,6 +23,7 @@ var App = React.createClass({
 								<li><Link to="index">Home</Link></li>
 								<li><Link to="domain">Domain</Link></li>
 								<li><Link to="whois">Whois</Link></li>
+								<li><Link to="watcher">Watcher</Link></li>
 								<li><Link to="email">Email</Link></li>
 							</ul>
 						</div>
@@ -52,12 +54,25 @@ var routes = (
 		<Route name="index" handler={Index} />
 		<Route name="domain" path="domain/?:query?" handler={DomainBox} />
 		<Route name="whois" path="whois/?:query?" handler={WhoisBox} />
+		<Route name="watcher" path="watcher/?:query?" handler={WatcherBox} />
 		<Route name="email" path="email/?:query?" handler={EmailBox} />
 		<DefaultRoute handler={Index} />
 	</Route>
 );
 
+function login(username, password) {
+	var hash = username + ":" + password
+	hash = btoa(unescape(encodeURIComponent(hash)));
+	$.ajaxSetup({
+		headers: {
+			'Authorization': 'Basic ' + hash
+		}
+	});
+}
+
 Router.run(routes, function(Handler, state) {
 	var params = state.params;
 	React.render(<Handler params={params} />, document.body);
 });
+
+

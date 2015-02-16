@@ -96,3 +96,12 @@ form .searchSubmit {
 	from {transform: rotate(0deg);}
 	to {transform: rotate(360deg);}
 }
+
+input.third, button.third {
+	width: 31%;
+	margin-right: 13px;
+}
+
+.block form, .block input, .block button {
+	margin-bottom: 0;
+}

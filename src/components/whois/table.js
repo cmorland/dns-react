@@ -63,6 +63,20 @@ module.exports = React.createClass({
 			status = status.join("\n");
 		}
 
+		var nameservers = [];
+		if (whois.data.nameservers) {
+			var i = 0;
+			nameservers = whois.data.nameservers.map(function(ns, i) {
+				i++;
+				return(
+					<tr>
+						<th>#{i}</th>
+						<td colSpan="2">{ns}</td>
+					</tr>
+				)
+			})
+		}
+
 		return (
 			<div>
 				<table className="u-full-width">
@@ -89,17 +103,6 @@ module.exports = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
-						{
-							whois.data.nameservers.map(function(ns, i) {
-								i++;
-								return(
-									<tr>
-										<th>#{i}</th>
-										<td colSpan="2">{ns}</td>
-									</tr>
-									)
-							})
-						}
 					</tbody>
 				</table>
 

@@ -12,10 +12,10 @@ module.exports = flux.createStore({
 	},
 	addRecordsByDomainQuery: function(query) {
 		var self = this;
-		$.get("/api/v1/domain/" + query + "/records")
+		$.get("/api/v1/records/?domain=" + query)
 		.done(function(data) {
 			self.records = $.parseJSON(data);
-			self.emit('record.add');
+			self.emit('record.loaded');
 		})
 		.fail(function(data) {
 			self.emit('record.error', "No records");	
