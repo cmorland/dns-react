@@ -34,10 +34,6 @@ form .searchSubmit {
 	text-decoration: underline;
 }
 
-#nav {
-	position: fixed;
-}
-
 #main {
 	margin-top: 1rem;
 }
@@ -104,4 +100,38 @@ input.third, button.third {
 
 .block form, .block input, .block button {
 	margin-bottom: 0;
+}
+
+#nav {
+	position: fixed;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+#nav.hidden {
+	z-index: 20;
+	overflow: hidden;
+}
+
+#nav.slide-left {
+	top: 0;
+	width: 300px;
+	height: 100%;
+	left: -300px
+}	
+
+#nav.slide-left.show {
+	left: 0;
+	padding-left: 60px;
+}
+
+#login {
+	margin-top: 20%;
+}
+
+.u-text-center {
+	text-align: center;
 }

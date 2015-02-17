@@ -2,19 +2,28 @@ var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 var Link = Router.Link;
+var Transition = Router.Transition;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var DomainBox = require('./components/domain/box.js');
 var EmailBox = require('./components/email/box.js');
 var WhoisBox = require('./components/whois/box.js');
 var WatcherBox = require('./components/watcher/box.js');
+var LoginBox = require('./components/auth/box.js');
+var AuthStore = require('./components/auth/store.js');
 
 var App = React.createClass({
 	render: function() {
+		var menuClass = "one columns slide-left";
+		if (!AuthStore.LoggedIn()) {
+			menuClass += " hidden";
+		} else {
+			menuClass += " show";
+		}
 		return (
 			<div className="container" id="main">
 				<div className="row">
-					<div className="one columns" id="nav">
+					<div className={menuClass} id="nav">
 						<div className="intro">
 							<h1>DNS</h1>
 							<p>Tools and ting!</p>
@@ -56,23 +65,21 @@ var routes = (
 		<Route name="whois" path="whois/?:query?" handler={WhoisBox} />
 		<Route name="watcher" path="watcher/?:query?" handler={WatcherBox} />
 		<Route name="email" path="email/?:query?" handler={EmailBox} />
+		<Route name="login" path="login" handler={LoginBox} />
 		<DefaultRoute handler={Index} />
 	</Route>
 );
 
-function login(username, password) {
-	var hash = username + ":" + password
-	hash = btoa(unescape(encodeURIComponent(hash)));
-	$.ajaxSetup({
-		headers: {
-			'Authorization': 'Basic ' + hash
+AuthStore.CheckLogin(function() {
+	Router.run(routes, function(Handler, state) {
+		console.log(AuthStore.LoggedIn());
+		if (state.pathname == "/login" || AuthStore.LoggedIn() == true) {
+			var params = state.params;
+			React.render(<Handler params={params} />, document.body);
+		} else {
+			Handler.transitionTo("login");
 		}
 	});
-}
-
-Router.run(routes, function(Handler, state) {
-	var params = state.params;
-	React.render(<Handler params={params} />, document.body);
 });
 
 
