@@ -3,7 +3,7 @@
   "dependencies": {
     "browserify": "*",
     "gulp": "*",
-    "react": "*",
+    "react": "0.12",
     "underscore": "*",
     "moment": "*",
     "del": "*",
