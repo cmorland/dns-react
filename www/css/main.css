@@ -2,9 +2,42 @@
 	border: 1px solid #bbb;
 	padding: 2.5rem 3rem;
 	-webkit-font-smoothing: antialiased;
-	margin: 0.8rem .2rem;
+	margin: 3% 0;
 	border: 1px solid #E1E1E1;
 	border-radius: 4px
+}
+
+pre code {
+	word-break: break-all;
+}
+
+.button-block {
+	font-size: 1.3rem;
+	margin-left: 1.2rem;
+	padding: 0.1rem 0.7rem;
+	-webkit-font-smoothing: antialiased;
+	border: 1px solid #E1E1E1;
+	border-radius: 4px;
+	background-color: white;
+}
+
+.button-primary {
+	color: #FFF;
+	background-color: #33C3F0;
+	border-color: #33C3F0;
+}
+
+.small {
+	font-size: .8rem;
+	padding: 6px 15px;
+	line-height: 1.5rem;
+	margin-bottom: 0;
+	height: auto;
+}
+
+.button-block:hover {
+	color: #33C3F0;
+	cursor: pointer;
 }
 
 .intro h1 {
@@ -31,8 +64,44 @@ form .searchSubmit {
 }
 
 .intro ul li a.active {
-	text-decoration: underline;
+	margin-left: -0.3rem;
 }
+
+.intro ul li a.active::before {
+	content: "|";
+	color: #e1e1e1;
+	position: relative;
+	right: 1rem;
+	top: -0.1rem;
+
+}
+
+body {
+	padding-left: 18rem;
+}
+
+div:hover > label {
+	color: black;
+}
+
+div > label {
+	color: #e1e1e1;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+a {
+	text-decoration: none;
+}
+
+.container {
+	margin-left: 10%;
+	max-width: 1080px;
+}
+
 
 #main {
 	margin-top: 1rem;
@@ -111,6 +180,31 @@ input.third, button.third {
 	transition: all 0.3s;
 }
 
+#nav h4 {
+	margin-top: 2rem;
+	font-weight: 300;
+	letter-spacing: 0.5rem;
+	cursor: pointer;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+#nav h4:hover {
+	color: #1EAEDB;
+}
+
+#nav li.section {
+	text-transform: uppercase;
+	font-size: 1rem;
+	margin-top: 2.5rem;
+	letter-spacing: 0.2rem;
+	color: #e1e1e1;
+	font-weight: 400;
+}
+
 #nav.hidden {
 	z-index: 20;
 	overflow: hidden;
@@ -118,14 +212,18 @@ input.third, button.third {
 
 #nav.slide-left {
 	top: 0;
-	width: 300px;
+	width: 18rem;
 	height: 100%;
-	left: -300px
+	left: -18rem;
 }	
 
 #nav.slide-left.show {
+	padding-top: 1rem;
+	height: 100%;
+	background: white;
+	border-right: 1px solid #E1E1E1;
+	padding-left: 4rem;
 	left: 0;
-	padding-left: 60px;
 }
 
 #login {
@@ -135,3 +233,4 @@ input.third, button.third {
 .u-text-center {
 	text-align: center;
 }
+

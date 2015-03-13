@@ -6,7 +6,13 @@
     "react": "*",
     "underscore": "*",
     "moment": "*",
-    "del": "*"
+    "del": "*",
+    "reactify": "*",
+    "react-router": "*",
+    "flux-react": "*",
+    "jsdifflib": "*",
+    "spin": "*",
+    "react-loader": "*"
   },
   "devDependencies": {
     "gulp-react": "^2.0.0"

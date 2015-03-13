@@ -6,6 +6,10 @@ var Navigation = require('react-router').Navigation;
 module.exports = React.createClass({
 	mixins: [Navigation],
 	componentWillMount: function() {
+		if (Store.LoggedIn()) {
+			this.transitionTo('index');
+			return;
+		}
 		Store.on('auth.done', this.loggedIn);
 	},
 	componentWillUnmount: function() {
@@ -18,7 +22,7 @@ module.exports = React.createClass({
 		Actions.auth(u, p);
 	},
 	loggedIn: function() {
-		this.transitionTo("index");
+		this.transitionTo('index');
 	},
 	render: function() {
 		return (

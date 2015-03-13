@@ -55,16 +55,20 @@ module.exports = React.createClass({
 			loaded = "searchSubmit loading";
 			buttonText = <i className="icon ion-ios-loop"></i>;
 		}
+		var error = null;
+		if (this.state.error) {
+			error = <p>{this.state.error}</p>
+		}
 		return (
-			<div>
-				<p className="noBottomMargin">{this.props.message}</p>
+			<div className="block">
+				<label>{this.props.message}</label>
 				<form onSubmit={this.handleSubmit}>
 					<input className="searchBar u-pull-left" type="text" placeholder={this.props.placeholder} ref="query" />
 					<button className={loaded} type="submit" disabled={!this.state.loaded}>
 						{buttonText}
 					</button>
 				</form>
-				<p>{this.state.error}</p>
+				{error}
 			</div>
 		);
 	}

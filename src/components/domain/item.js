@@ -7,6 +7,15 @@ var WhoisActions = require('../whois/actions.js');
 var WhoisTable = require('../whois/table.js');
 var Store = require('./store');
 
+function secondsToString(seconds) {
+	var numyears = Math.floor(seconds / 31536000);
+	var numdays = Math.floor((seconds % 31536000) / 86400); 
+	var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+	var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+	var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+	return numyears + " years " +  numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+}
+
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
@@ -75,7 +84,7 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<div className="block">
-					<h4>Domain Information</h4>
+					<h5>Domain Information</h5>
 					<table className="u-full-width">
 						<thead>
 							<tr>

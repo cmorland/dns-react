@@ -17,6 +17,7 @@ function login(hash) {
 
 module.exports = flux.createStore({
 	loggedIn: false,
+	username: '',
 	actions: [
 		actions.auth
 	],
@@ -38,13 +39,16 @@ module.exports = flux.createStore({
 		LoggedIn: function() {
 			return this.loggedIn;
 		},
+		Username: function() {
+			return this.username;
+		},
 		CheckLogin: function(fn) {
 			var self = this;
 			$.get("/api/v1/auth/?check=1")
 			.done(function(data, textStatus, request) {
 				var expires = request.getResponseHeader('X-Expires');
+				self.username = request.getResponseHeader('X-User');
 				if (expires) {
-					console.log('woooo');
 					self.loggedIn = true;
 				}
 				fn();

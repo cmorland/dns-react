@@ -13,7 +13,7 @@ module.exports = flux.createStore({
 	getDomainsByEmailQuery: function(query) {
 		this.emit('email.query');
 		var self = this;
-		$.get("/api/v1/domain/query/email/" + query)
+		$.get("/api/v1/domain/?email=" + encodeURI(query))
 		.done(function(data) {
 			self.results = $.parseJSON(data);
 			if (self.results.length > 0) {

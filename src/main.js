@@ -11,37 +11,38 @@ var WhoisBox = require('./components/whois/box.js');
 var WatcherBox = require('./components/watcher/box.js');
 var LoginBox = require('./components/auth/box.js');
 var AuthStore = require('./components/auth/store.js');
+var DiffBox = require('./components/diff/box.js');
 
 var App = React.createClass({
 	render: function() {
-		var menuClass = "one columns slide-left";
+		var menuClass = "two columns slide-left";
 		if (!AuthStore.LoggedIn()) {
 			menuClass += " hidden";
 		} else {
 			menuClass += " show";
 		}
 		return (
-			<div className="container" id="main">
-				<div className="row">
-					<div className={menuClass} id="nav">
-						<div className="intro">
-							<h1>DNS</h1>
-							<p>Tools and ting!</p>
-
-							<ul>
-								<li><Link to="index">Home</Link></li>
-								<li><Link to="domain">Domain</Link></li>
-								<li><Link to="whois">Whois</Link></li>
-								<li><Link to="watcher">Watcher</Link></li>
-								<li><Link to="email">Email</Link></li>
-							</ul>
-						</div>
+			<div>
+				<div className={menuClass} id="nav">
+					<div className="intro">
+						<h4>DNS</h4>
+						<ul>
+							<li className="section">My</li>
+							<li><Link to="index">Dashboard</Link></li>
+							<li className="section">Lookup</li>
+							<li><Link to="domain">Domain</Link></li>
+							<li><Link to="whois">Whois</Link></li>
+							<li><Link to="email">Email</Link></li>
+							<li className="section">Tools</li>
+							<li><Link to="watcher">Watcher</Link></li>
+						</ul>
 					</div>
 				</div>
-				<div className="row">
-					<div className="two columns"><p></p></div>
-					<div className="ten columns">
-						<RouteHandler {...this.props} />
+				<div className="container" id="main">
+					<div className="row">
+						<div className="twelve columns">
+							<RouteHandler {...this.props} />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -50,10 +51,40 @@ var App = React.createClass({
 	}
 });
 
+var NotificationTable = require('./components/notification/table.js');
+var NotificationStore = require('./components/notification/store.js');
+var WatcherTable = require('./components/watcher/table.js');
+var WatcherStore = require('./components/watcher/store.js');
+var WatcherActions = require('./components/watcher/actions.js');
 var Index = React.createClass({
+	componentWillMount: function() {
+		NotificationStore.onAny(this.changeState)
+		NotificationStore.Query({
+			orderBy: "messages->>'added'",
+			order: 'desc'
+		});
+		WatcherStore.onAny(this.changeState)
+		WatcherActions.query({'user': AuthStore.Username() });
+	},
+	componentWillUnmount: function() {
+		//NotificationStore.offAny(this.changeState)
+		WatcherStore.offAny(this.changeState)
+	},
+	changeState: function () {
+		this.setState({});
+	},
 	render: function() {
 		return (
-			<h2>HELLO</h2>
+			<div>
+				<div className="block">
+					<h5>Notifications</h5>
+					<NotificationTable data={NotificationStore.GetResults()} />
+				</div>
+				<div className="block">
+					<h5>My Watches</h5>
+					<WatcherTable data={WatcherStore.getResults()} />
+				</div>
+			</div>
 		)
 	}
 });
@@ -66,6 +97,7 @@ var routes = (
 		<Route name="watcher" path="watcher/?:query?" handler={WatcherBox} />
 		<Route name="email" path="email/?:query?" handler={EmailBox} />
 		<Route name="login" path="login" handler={LoginBox} />
+		<Route name="diff" path="diff/:domain" handler={DiffBox} />
 		<DefaultRoute handler={Index} />
 	</Route>
 );

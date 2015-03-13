@@ -8,16 +8,14 @@ module.exports = React.createClass({
 	render: function() {
 		var whois = this.props.data;
 		if ($.isEmptyObject(whois)) {
-			return (
-				<p>No Whois information at present.</p>
-			)
+			return null;
 		}
 
 		if (this.props.raw) {
 			return (
-				<pre>
-					<code>{whois.raw}</code>
-				</pre>
+					<pre>
+						<code>{whois.raw}</code>
+					</pre>
 			)
 		}
 

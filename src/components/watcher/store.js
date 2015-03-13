@@ -20,7 +20,18 @@ module.exports = flux.createStore({
 	},
 	query: function(query) {
 		var self = this;
-		$.get("/api/v1/watchers/")
+
+		var paramsArr = [];
+		for (var k in query) {
+			if (query.hasOwnProperty(k)) {
+				paramsArr.push(k+'='+query[k]);
+			}
+		}
+		var params = paramsArr.join('&');
+		if (params.length > 0) {
+			params = '?' + params
+		}
+		$.get("/api/v1/watchers/"+params)
 		.done(function(data) {
 			self.results = $.parseJSON(data);
 			self.emit('watcher.loaded');

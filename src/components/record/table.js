@@ -1,6 +1,23 @@
 var React = require('react');
 var moment = require('moment');
 
+formatTime = function(time) {
+	var ret = time % 60 + "s";
+	time = Math.floor(time / 60);
+	if (time !== 0) {
+		ret = time % 60 + "min "+ret;
+		time = Math.floor(time / 60);
+		if (time !== 0) {
+			ret = time % 60 + "h "+ret;
+			time = Math.floor(time / 24);
+			if (time !== 0) {
+				ret = time % 60 + "d "+ret;
+			}
+		}
+	}           
+	return ret;
+};
+
 module.exports = React.createClass({
 	render: function() {
 		if (this.props.data.length == 0) {
@@ -10,15 +27,24 @@ module.exports = React.createClass({
 		}
 
 		var rows = [];
+		var lastParseDate = '';
 		this.props.data.forEach(function(record) {
-			var parse_date = moment(record.parse_date).format('DD-MM-YYYY');
+			var parseDate = moment(record.parse_date).format('DD-MM-YYYY');
+			var ttl = formatTime(record.args.ttl);
+			var current = <span className="block small">current</span>
+			if (lastParseDate == '') {
+				lastParseDate = parseDate;
+			} else if (lastParseDate != parseDate) {
+				current = null;
+			}
 			rows.push(
 				<tr>
 					<td>{record.name}</td>
-					<td>{parse_date}</td>
-					<td>{record.type.name}</td>
-					<td>{record.args.ttl}</td>
+					<td>{parseDate}</td>
+					<td>{record.type.name.toUpperCase()}</td>
+					<td>{ttl}</td>
 					<td>{record.args.args}</td>
+					<td>{current}</td>
 				</tr>
 			);
 		});
@@ -31,6 +57,7 @@ module.exports = React.createClass({
 						<th>Type</th>
 						<th>TTL</th>
 						<th>Args</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>{rows}</tbody>

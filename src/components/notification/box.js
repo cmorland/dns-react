@@ -25,18 +25,18 @@ module.exports = React.createClass({
 	},
 	addWatcher: function(e) {
 		e.preventDefault();
-		var watcher = {
+		var notification = {
 			name: this.refs.name.getDOMNode().value.trim(),
 			interval: this.refs.interval.getDOMNode().value.trim()
 		};
-		Actions.add(watcher);
+		Actions.add(notification);
 	},
 	render: function() {
 		return (
 			<div>
-				<Form message="Search watchers" store={Store} ns="watcher" placeholder="example.com" action={Actions.query} />
-				<div className="block">
+				<Form message="Search notifications" store={Store} ns="notification" placeholder="example.com" action={Actions.query} />
 				<label>Add Watcher</label>
+				<div className="block">
 					<form onSubmit={this.addWatcher}>
 						<div className="row">
 							<div className="one-third column">
@@ -51,9 +51,8 @@ module.exports = React.createClass({
 						</div>
 					</form>
 				</div>
-				<div className="block">
+				<br />
 				<Table data={this.state.result} />
-			</div>
 			</div>
 		);
 	}

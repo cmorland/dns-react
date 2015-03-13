@@ -5,6 +5,7 @@ var Form = require('../form.js');
 var Actions = require('./actions.js');
 var Loader = require('react-loader');
 var Item = require('./item.js');
+var Table = require('./table.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -32,11 +33,11 @@ module.exports = React.createClass({
 		var domains = this.state.results;
 		return (
 			<div>
-				<Form message="Perform a domain check based on email."
+				<Form message="Search Domains by Email"
 					action={Actions.getDomainsByEmailQuery} 
 					store={Store} ns="email"
 					placeholder="admin@example.com" />
-				<List data={this.state.results} item={Item} />
+				<Table data={this.state.results} />
 			</div>
 		);
 	}

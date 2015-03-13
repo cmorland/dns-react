@@ -7,6 +7,7 @@ var Actions = require('./actions.js');
 
 module.exports = React.createClass({
 	getInitialState: function() {
+		Actions.clear();
 		return {
 			result: Store.getResult(),
 		};
@@ -26,7 +27,7 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<Form message="Perform a domain whois query." store={Store} ns="whois" placeholder="example.com" action={Actions.queryDomain} />
-				<Table data={this.state.result} />
+					<Table data={this.state.result} raw={true} />
 			</div>
 		);
 	}
