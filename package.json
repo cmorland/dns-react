@@ -3,16 +3,17 @@
   "dependencies": {
     "browserify": "*",
     "gulp": "*",
-    "react": "0.12",
+    "react": "^0.12.0",
     "underscore": "*",
     "moment": "*",
     "del": "*",
     "reactify": "*",
-    "react-router": "*",
-    "flux-react": "*",
+    "react-router": "^0.12.0",
+    "flux-react": "^1.0.0",
     "jsdifflib": "*",
     "spin": "*",
-    "react-loader": "*"
+    "react-loader": "^1.0",
+    "merge": "*"
   },
   "devDependencies": {
     "gulp-react": "^2.0.0"

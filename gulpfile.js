@@ -4,7 +4,7 @@ var fs = require('fs');
 var del = require('del');
 var reactify = require('reactify');
 
-gulp.task('app', ['clean'], function() {
+gulp.task('app', function() {
 	return browserify('./src/main.js')
 	.transform(reactify)
 	.external(require.resolve('react-router'))
@@ -36,9 +36,11 @@ gulp.task('common', function() {
 	});
 });
 
+/*
 gulp.task('clean', function(done) {
 	del(['./www/js/app.js'], done);
 });
+*/
 
 gulp.task('watch', function() {
 	gulp.watch('./src/**/*.js', ['app']);
